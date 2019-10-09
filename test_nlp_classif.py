@@ -25,3 +25,9 @@ def splitTweet(pdDataColumn, arraySplitTweet = []):
     for x in pdDataColumn:
        # y = str(x).lower()
         arraySplitTweet.append(str(x).split())    
+        
+def match_word(txt, word):
+    return int (word in txt)       
+
+def count_word(txt, word):
+    return txt.count(word)

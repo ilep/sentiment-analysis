@@ -10,27 +10,30 @@ import os
 
 include('C:\\Users\\Skad\\.spyder-py3\\test_nlp_classif.py')
 
-#ref_positive = frozenset('like', 'love', 'great', 'good','interesting', 'cool')
-#ref_negative = frozenset('overated', 'bad', 'sad', 'worst', 'wrong')
+ref_positive = ('like', 'love', 'great', 'good','interesting', 'cool')
+ref_negative = ('overated', 'bad', 'sad', 'worst', 'wrong', 'hate', 'dislike')
     
 ###############################################################"
 df = pd.read_csv('C:\\Users\\Skad\\Desktop\\Python\\testdata.txt',sep='delimiter',names=['txt'],engine='python')
+df_neg = pd.read_csv('C:\\Users\\Skad\\Desktop\\Python\\testdata.txt',sep='delimiter',names=['txt'],engine='python')
 # engin python is to let the ""compiler"" know that the C parser is not needed, that enable a warning Parserwarning
 
-#Tweets = df['txt']
-Tweets = [df['txt'][0],df['txt'][1],df['txt'][2],df['txt'][3],df['txt'][5],df['txt'][94]]
-arraySplitTweet = []
-splitTweet(Tweets, arraySplitTweet)
-#print(arraySplitTweet)
+#Tweets = [df['txt'][0],df['txt'][1],df['txt'][2],df['txt'][3],df['txt'][7],df['txt'][94],,df['txt'][940]]
 
-##### Tweets that contain "like"
-arrayLike = []
-arrayLove = []
-fun('like', arraySplitTweet, arrayLike)
-fun('love', arraySplitTweet, arrayLove)
-print("array like\n", arrayLike)
-print("array love\n", arrayLove)
-print(df['txt'][4])
+
+#def match_word(txt, word):
+#    return int(word in txt)
+
+df['love_in_txt'] = df.txt.apply(match_word, args=("love",))
+
+
+for word in list(ref_positive):
+    df['%s_in_txt'%word] = df.txt.apply(match_word, args=(word,))
+    df['%s_occur'%word] = df.txt.apply(count_word, args=(word,))
+    
+for word in list(ref_negative):
+    df_neg['%s_in_txt'%word] = df.txt.apply(match_word, args=(word,))  
+    df_neg['%s_occur'%word] = df.txt.apply(count_word, args=(word,))
 
 #print(arraySplitTweet)
 
