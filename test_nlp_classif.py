@@ -21,13 +21,11 @@ def fun(wordToSearch, arrayData_txt, arrayRes, weigh = 1):
         i = 1 + i
         
 def splitTweet(pdDataColumn, arraySplitTweet = []):
-    #
     for x in pdDataColumn:
-       # y = str(x).lower()
         arraySplitTweet.append(str(x).split())    
         
-def match_word(txt, word):
-    return int (word in txt)       
+def match_word(txt, word, weigh = 1):
+    return weigh * int(word in txt)       
 
 def count_word(txt, word):
     return txt.count(word)
