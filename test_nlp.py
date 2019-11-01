@@ -18,13 +18,24 @@ ref_negativeWithWeigh = {"overated":-4, "bad":-5,"stupid":-5, "sad":-5, "worst":
 ###############################################################
 dfTweets = pd.read_csv('C:\\Users\\Skad\\Desktop\\Python\\testdata.txt',sep='delimiter',names=['txt'],engine='python')
 # engin python is to let the ""compiler"" know that the C parser is not needed, that enable a warning Parserwarning
-
-
 i = 0
 for tweet in dfTweets.txt:# <=> dfTweets['txt']
     #df.txt.apply(lower, args=())??
     dfTweets['txt'].at[i]  = dfTweets['txt'].at[i].lower()
     i = i + 1
+
+"""dfTraining = pd.read_csv('C:\\Users\\Skad\\Desktop\\Python\\training.txt',sep='delimiter',names=['txt'],engine='python')
+
+
+
+dfTraining["isGood"] = dfTraining.txt
+i = 0
+for i in range(len(dfTraining.txt)):
+    dfTraining.isGood.at[i]  = dfTraining.txt.at[i].split()[0]
+    dfTraining.txt.at[i] = dfTraining.txt.at[i][1:]
+    i = i + 1
+"""
+
 
 #Tweets = [df['txt'][0],df['txt'][1],df['txt'][2],df['txt'][3],df['txt'][7],df['txt'][94],,df['txt'][940]]
 
@@ -41,12 +52,10 @@ res = dfTweets
 for word, values in ref_positiveWithWeigh.items():
     res['grade_%s'%word] = dfTweets.txt.apply(match_word, args=(word,values,))     
     #df['grade'] = df.txt.apply(match_word, args=(word.keys(),int(word.values())))
-    
 for word in list(ref_negativeWithWeigh):
     res['grade_%s'%word] = dfTweets.txt.apply(match_word, args=(word,))  
-
-res.sum(axis = 1, skipna = True)    
-
+tt = dfTweets.head()
+ress = ClassifyTweet(dfTweets, ref_positiveWithWeigh, ref_negativeWithWeigh)
 #print(arraySplitTweet)
 
 #like, love, great, good, interesting, cool
